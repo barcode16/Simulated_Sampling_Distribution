@@ -1,6 +1,6 @@
 ---
-title       : Exam Pass Rates & Confidence Intervals
-subtitle    : Creating A Sampling Distribution by Simulation
+title       : Creating A Sampling Distribution by Simulation
+subtitle    : Statistics for a General Audience
 author      : Michael Jackson
 job         : 
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -44,12 +44,31 @@ By using a sampling distribution created by taking a large number of different s
 
 --- 
 
-## Slide 4
+## The Shiny App Solution
+
+* The Shiny App will enable us to show the theoretical sampling distribution and then show a sampling distribution created by simulation. The results will be shown in two separate tabs, enabling a comparison between the confidence intervals derived by theory and by simulation. For example, here is a confidence interval for a binomial sampling distribution where the sample size is 100 and the proportion in the population is 0.5 (50%)
 
 
+```
+## [1] "95% confidence interval using theory = 40.4% to 59.6% (Mean = 50%)"
+```
+
+And here is a confidence interval for a sampling distribution derived from 1000 simulated samples for the same sample size and proportion in the population
 
 
---- 
+```
+## [1] "95% confidence interval using simulation = 40% - 60% (Mean = 50.1%)"
+```
+
+As we can see, the confidence interval derived from the simulation without any maths, and easier to explain to a general audience,  is similar to the confidence interval derived by theory!
+
+A third tab includes the documentation for the app (i.e. the instructions for use). 
+
+
+                round(dist$dist[(k*0.025)+1],1), "% - ", round(dist$dist[(k*0.975)], 1), 
+                "% (Mean = ", round(mean(dist$dist),1), "%)", sep = "")
+
+
 
 
 

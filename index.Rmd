@@ -75,12 +75,38 @@ print(g1)
 
 --- 
 
-## Slide 4
+## The Shiny App Solution
+
+* The Shiny App will enable us to show the theoretical sampling distribution and then show a sampling distribution created by simulation. The results will be shown in two separate tabs, enabling a comparison between the confidence intervals derived by theory and by simulation. For example, here is a confidence interval for a binomial sampling distribution where the sample size is 100 and the proportion in the population is 0.5 (50%)
+
+```{r, echo=FALSE}
+print(paste("95% confidence interval using theory = ", round(prop.test(100*0.5, 100, conf.level=0.95)$conf.int[1]*100, 1), "% to ",
+                      round(prop.test(100*0.5, 100, conf.level=0.95)$conf.int[2]*100, 1), "% (Mean = 50%)", sep = ""))
+                      
+```
+
+And here is a confidence interval for a sampling distribution derived from 1000 simulated samples for the same sample size and proportion in the population
+
+```{r, echo=FALSE, warning=FALSE}
+    library(dplyr)
+  set.seed(47464)
+    dist <- rbinom(1000, 100, prob = 0.5)
+    dist <- data.frame(dist)
+    dist <- arrange(dist, dist)
+print(paste("95% confidence interval using simulation = ",  round(dist$dist[(1000*0.025)+1],1), "% - ", round(dist$dist[(1000*0.975)], 1), 
+                "% (Mean = ", round(mean(dist$dist),1), "%)", sep = ""))
+                      
+```
+
+As we can see, the confidence interval derived from the simulation without any maths, and easier to explain to a general audience,  is similar to the confidence interval derived by theory!
+
+A third tab includes the documentation for the app (i.e. the instructions for use). 
 
 
+                round(dist$dist[(k*0.025)+1],1), "% - ", round(dist$dist[(k*0.975)], 1), 
+                "% (Mean = ", round(mean(dist$dist),1), "%)", sep = "")
 
 
---- 
 
 
 
